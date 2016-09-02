@@ -14,90 +14,90 @@
   "A ref for storing the symbols used to get configuration settings."
   (ref []))
 
-(cc/defprop-str db-driver-class
+(cc/defprop-optstr db-driver-class
   "The name of the JDBC driver to use."
   [props config-valid configs]
-  "notificationagent.db.driver" )
+  "notificationagent.db.driver" "org.postgresql.Driver")
 
-(cc/defprop-str db-subprotocol
+(cc/defprop-optstr db-subprotocol
   "The subprotocol to use when connecting to the database (e.g. postgresql)."
   [props config-valid configs]
-  "notificationagent.db.subprotocol")
+  "notificationagent.db.subprotocol" "postgresql")
 
-(cc/defprop-str db-host
+(cc/defprop-optstr db-host
   "The host name or IP address to use when connecting to the database."
   [props config-valid configs]
-  "notificationagent.db.host")
+  "notificationagent.db.host" "dedb")
 
-(cc/defprop-str db-port
+(cc/defprop-optstr db-port
   "The port number to use when connecting to the database."
   [props config-valid configs]
-  "notificationagent.db.port")
+  "notificationagent.db.port" "5432")
 
-(cc/defprop-str db-name
+(cc/defprop-optstr db-name
   "The name of the database to connect to."
   [props config-valid configs]
-  "notificationagent.db.name")
+  "notificationagent.db.name" "notifications")
 
-(cc/defprop-str db-user
+(cc/defprop-optstr db-user
   "The username to use when authenticating to the database."
   [props config-valid configs]
-  "notificationagent.db.user")
+  "notificationagent.db.user" "de")
 
-(cc/defprop-str db-password
+(cc/defprop-optstr db-password
   "The password to use when authenticating to the database."
   [props config-valid configs]
-  "notificationagent.db.password")
+  "notificationagent.db.password" "notprod")
 
-(cc/defprop-boolean email-enabled
+(cc/defprop-optboolean email-enabled
   "True if e-mail notifications are enabled."
   [props config-valid configs]
-  "notificationagent.enable-email")
+  "notificationagent.enable-email" true)
 
-(cc/defprop-str email-url
+(cc/defprop-optstr email-url
   "The URL used to connect to the mail service."
   [props config-valid configs]
-  "notificationagent.email-url")
+  "notificationagent.email-url" "http://iplant-email:60000")
 
-(cc/defprop-str amqp-host
+(cc/defprop-optstr amqp-host
   "The name of the host where the AMQP broker is running."
   [props config-valid configs]
-  "notificationagent.amqp.host")
+  "notificationagent.amqp.host" "rabbit")
 
-(cc/defprop-int amqp-port
+(cc/defprop-optint amqp-port
   "The port to use when connecting to the AMQP broker."
   [props config-valid configs]
-  "notificationagent.amqp.port")
+  "notificationagent.amqp.port" 5672)
 
-(cc/defprop-str amqp-user
+(cc/defprop-optstr amqp-user
   "The username to use when authenticating to the AMQP broker."
   [props config-valid configs]
-  "notificationagent.amqp.user")
+  "notificationagent.amqp.user" "guest")
 
-(cc/defprop-str amqp-password
+(cc/defprop-optstr amqp-password
   "The password to use when authenticating to the AMQP broker."
   [props config-valid configs]
-  "notificationagent.amqp.password")
+  "notificationagent.amqp.password" "guest")
 
-(cc/defprop-str amqp-exchange-name
+(cc/defprop-optstr amqp-exchange-name
   "The name of the AMQP exchange."
   [props config-valid configs]
-  "notificationagent.amqp.exchange.name")
+  "notificationagent.amqp.exchange.name" "de")
 
-(cc/defprop-boolean amqp-exchange-durable
+(cc/defprop-optboolean amqp-exchange-durable
   "Indicates whether or not the AMQP exchange should be declared as durable."
   [props config-valid configs]
-  "notificationagent.amqp.exchange.durable")
+  "notificationagent.amqp.exchange.durable" true)
 
-(cc/defprop-boolean amqp-exchange-auto-delete
+(cc/defprop-optboolean amqp-exchange-auto-delete
   "Indicates whether or not the AMQP exchange should be declared as auto-delete."
   [props config-valid configs]
-  "notificationagent.amqp.exchange.auto-delete")
+  "notificationagent.amqp.exchange.auto-delete" false)
 
-(cc/defprop-int listen-port
+(cc/defprop-optint listen-port
   "The port to listen to for incoming connections."
   [props config-valid configs]
-  "notificationagent.listen-port")
+  "notificationagent.listen-port" 60000)
 
 (defn- validate-config
   "Validates the configuration settings after they've been loaded."
