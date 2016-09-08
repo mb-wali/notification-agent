@@ -7,13 +7,13 @@
       (string/trim (:out (sh "git" "rev-parse" "HEAD")))
       ""))
 
-(defproject org.iplantc/notificationagent "5.2.8.0"
+(defproject org.cyverse/notification-agent "2.8.1-SNAPSHOT"
   :description "A web service for storing and forwarding notifications."
-  :url "https://github.com/iPlantCollaborativeOpenSource/DE"
+  :url "https://github.com/cyverse-de/notification-agent"
   :license {:name "BSD"
             :url "http://iplantcollaborative.org/sites/default/files/iPLANT-LICENSE.txt"}
   :manifest {"Git-Ref" ~(git-ref)}
-  :uberjar-name "notificationagent-standalone.jar"
+  :uberjar-name "notification-agent-standalone.jar"
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [cheshire "5.5.0"
                   :exclusions [[com.fasterxml.jackson.dataformat/jackson-dataformat-cbor]
@@ -22,10 +22,10 @@
                                [com.fasterxml.jackson.core/jackson-databind]
                                [com.fasterxml.jackson.core/jackson-core]]]
                  [compojure "1.5.0"]
-                 [org.iplantc/clojure-commons "5.2.8.0"]
-                 [org.iplantc/kameleon "5.2.8.0"]
-                 [org.iplantc/common-cli "5.2.8.0"]
-                 [org.iplantc/service-logging "5.2.8.0"]
+                 [org.cyverse/clojure-commons "2.8.0"]
+                 [org.cyverse/kameleon "2.8.0"]
+                 [org.cyverse/common-cli "2.8.0"]
+                 [org.cyverse/service-logging "2.8.0"]
                  [me.raynes/fs "1.4.6"]
                  [clj-http "2.0.0"]
                  [clj-time "0.11.0"]

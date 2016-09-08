@@ -162,7 +162,7 @@
 (def svc-info
   {:desc "A web service for storing and forwarding notifications."
    :app-name "notificationagent"
-   :group-id "org.iplantc"
+   :group-id "org.cyverse"
    :art-id "notificationagent"
    :service "notificationagent"})
 
