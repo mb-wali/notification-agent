@@ -1,3 +1,4 @@
+#!groovy
 def repo = "notification-agent"
 def dockerUser = "discoenv"
 
