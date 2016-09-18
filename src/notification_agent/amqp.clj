@@ -13,6 +13,7 @@
   []
   (rmq/connect {:host     (cfg/amqp-host)
                 :port     (cfg/amqp-port)
+                :vhost    (cfg/amqp-exchange-vhost)
                 :username (cfg/amqp-user)
                 :password (cfg/amqp-password)}))
 
