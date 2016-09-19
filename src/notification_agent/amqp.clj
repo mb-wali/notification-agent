@@ -19,7 +19,7 @@
 
 (defn- declare-exchange
   [ch]
-  (lhe/declare ch (cfg/amqp-exchange-name) "direct"
+  (lhe/declare ch (cfg/amqp-exchange-name) (cfg/amqp-exchange-type)
                {:durable     (cfg/amqp-exchange-durable)
                 :auto-delete (cfg/amqp-exchange-auto-delete)})
   (cfg/amqp-exchange-name))
