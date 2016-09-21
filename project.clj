@@ -39,7 +39,7 @@
              :linters [:wrong-arity :wrong-ns-form :wrong-pre-post :wrong-tag :misplaced-docstrings]}
   :plugins [[lein-ring "0.8.13"]
             [lein-marginalia "0.7.0"]
-            [test2junit "1.1.3"]
+            [test2junit "1.2.2"]
             [jonase/eastwood "0.2.3"]]
   :ring {:handler notification-agent.core/app
          :init notification-agent.core/load-config-from-file
