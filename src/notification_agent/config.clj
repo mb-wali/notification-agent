@@ -84,6 +84,16 @@
   [props config-valid configs]
   "notificationagent.amqp.exchange.name" "de")
 
+(cc/defprop-optstr amqp-exchange-vhost
+  "The name of the vhost where the AMQP exchange resides."
+  [props config-valid configs]
+  "notificationagent.amqp.exchange.vhost" "/")
+
+(cc/defprop-optstr amqp-exchange-type
+  "The name of the AMQP exchange type."
+  [props config-valid configs]
+  "notificationagent.amqp.exchange.type" "topic")
+
 (cc/defprop-optboolean amqp-exchange-durable
   "Indicates whether or not the AMQP exchange should be declared as durable."
   [props config-valid configs]
