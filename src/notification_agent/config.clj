@@ -59,35 +59,15 @@
   [props config-valid configs]
   "notificationagent.email-url" "http://iplant-email:60000")
 
-(cc/defprop-optstr amqp-host
-  "The name of the host where the AMQP broker is running."
+(cc/defprop-optstr amqp-uri
+  "The uri used to connect to the AMQP broker."
   [props config-valid configs]
-  "notificationagent.amqp.host" "rabbit")
-
-(cc/defprop-optint amqp-port
-  "The port to use when connecting to the AMQP broker."
-  [props config-valid configs]
-  "notificationagent.amqp.port" 5672)
-
-(cc/defprop-optstr amqp-user
-  "The username to use when authenticating to the AMQP broker."
-  [props config-valid configs]
-  "notificationagent.amqp.user" "guest")
-
-(cc/defprop-optstr amqp-password
-  "The password to use when authenticating to the AMQP broker."
-  [props config-valid configs]
-  "notificationagent.amqp.password" "guest")
+  "notificationagent.amqp.uri" "amqp://guest:guestPW@localhost:5672")
 
 (cc/defprop-optstr amqp-exchange-name
   "The name of the AMQP exchange."
   [props config-valid configs]
   "notificationagent.amqp.exchange.name" "de")
-
-(cc/defprop-optstr amqp-exchange-vhost
-  "The name of the vhost where the AMQP exchange resides."
-  [props config-valid configs]
-  "notificationagent.amqp.exchange.vhost" "/")
 
 (cc/defprop-optstr amqp-exchange-type
   "The name of the AMQP exchange type."
