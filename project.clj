@@ -26,6 +26,7 @@
                  [org.cyverse/kameleon "2.8.0"]
                  [org.cyverse/common-cli "2.8.0"]
                  [org.cyverse/service-logging "2.8.0"]
+                 [org.cyverse/event-messages "0.0.1"]
                  [me.raynes/fs "1.4.6"]
                  [clj-http "2.0.0"]
                  [clj-time "0.11.0"]

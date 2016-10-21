@@ -64,25 +64,40 @@
   [props config-valid configs]
   "notificationagent.amqp.uri" "amqp://guest:guestPW@localhost:5672")
 
-(cc/defprop-optstr amqp-exchange-name
+(cc/defprop-optstr exchange-name
   "The name of the AMQP exchange."
   [props config-valid configs]
   "notificationagent.amqp.exchange.name" "de")
 
-(cc/defprop-optstr amqp-exchange-type
+(cc/defprop-optstr exchange-type
   "The name of the AMQP exchange type."
   [props config-valid configs]
   "notificationagent.amqp.exchange.type" "topic")
 
-(cc/defprop-optboolean amqp-exchange-durable
+(cc/defprop-optboolean exchange-durable?
   "Indicates whether or not the AMQP exchange should be declared as durable."
   [props config-valid configs]
   "notificationagent.amqp.exchange.durable" true)
 
-(cc/defprop-optboolean amqp-exchange-auto-delete
+(cc/defprop-optboolean exchange-auto-delete?
   "Indicates whether or not the AMQP exchange should be declared as auto-delete."
   [props config-valid configs]
   "notificationagent.amqp.exchange.auto-delete" false)
+
+(cc/defprop-optstr queue-name
+  "The name of the AMQP queue attached to the exchange."
+  [props config-valid configs]
+  "notificationagent.amqp.queue.name" "events.notification-agent.queue")
+
+(cc/defprop-optboolean queue-durable?
+  "Whether or not the queue is durable."
+  [props config-valid configs]
+  "notificationagent.amqp.queue.durable" true)
+
+(cc/defprop-optboolean queue-auto-delete?
+  "Whether or not the queue is automatically deleted."
+  [props config-valid configs]
+  "notificationagent.amqp.queue.auto-delete" false)
 
 (cc/defprop-optint listen-port
   "The port to listen to for incoming connections."
