@@ -21,6 +21,8 @@
             [notification-agent.config :as config]
             [notification-agent.db :as db]
             [notification-agent.scheduler :as scheduler]
+            [notification-agent.events :as events]
+            [notification-agent.amqp :as amqp]
             [common-cli.core :as ccli]
             [me.raynes.fs :as fs]
             [service-logging.thread-context :as tc]
@@ -116,9 +118,19 @@
 
   (route/not-found "Unrecognized service path.\n"))
 
+(defn init-amqp
+  []
+  (let [amqp-handlers {"events.notification-agent.ping" events/ping-handler}
+        exchange-cfg  (events/exchange-config)
+        queue-cfg     (events/queue-config)
+        channel       (amqp/connect exchange-cfg queue-cfg (keys amqp-handlers))]
+    (amqp/channel channel)
+    (.start (Thread. (fn [] (amqp/subscribe channel (:name queue-cfg) amqp-handlers))))))
+
 (defn- init-service
   []
   (db/define-database)
+  (init-amqp)
   (scheduler/init))
 
 (defn- iplant-conf-dir-file
