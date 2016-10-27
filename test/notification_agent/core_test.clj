@@ -7,7 +7,6 @@
   (require 'notification-agent.config :reload)
   (config/load-config-from-file "conf/test/empty.properties")
   (testing "default configuration settings"
-    (is (= (config/db-driver-class) "org.postgresql.Driver"))
     (is (= (config/db-subprotocol) "postgresql"))
     (is (= (config/db-host) "dedb"))
     (is (= (config/db-port) "5432"))

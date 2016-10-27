@@ -13,8 +13,7 @@
 (defn- create-db-spec
   "Creates the database connection spec to use when accessing the database."
   []
-  {:classname   (db-driver-class)
-   :subprotocol (db-subprotocol)
+  {:subprotocol (db-subprotocol)
    :subname     (str "//" (db-host) ":" (db-port) "/" (db-name))
    :user        (db-user)
    :password    (db-password)})

@@ -14,11 +14,6 @@
   "A ref for storing the symbols used to get configuration settings."
   (ref []))
 
-(cc/defprop-optstr db-driver-class
-  "The name of the JDBC driver to use."
-  [props config-valid configs]
-  "notificationagent.db.driver" "org.postgresql.Driver")
-
 (cc/defprop-optstr db-subprotocol
   "The subprotocol to use when connecting to the database (e.g. postgresql)."
   [props config-valid configs]
