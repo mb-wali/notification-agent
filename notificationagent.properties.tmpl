@@ -1,0 +1,17 @@
+{{- with $base := (printf "configs/%s" (env "DE_ENV")) -}}
+# Database connection settings.
+{{ with $v := (key (printf "%s/notification-db/host" $base)) }}notificationagent.db.host = {{ $v }}{{ end }}
+{{ with $v := (key (printf "%s/notification-db/port" $base)) }}notificationagent.db.port = {{ $v }}{{ end }}
+{{ with $v := (key (printf "%s/notification-db/name" $base)) }}notificationagent.db.name = {{ $v }}{{ end }}
+{{ with $v := (key (printf "%s/notification-db/user" $base)) }}notificationagent.db.user = {{ $v }}{{ end }}
+{{ with $v := (key (printf "%s/notification-db/pass" $base)) }}notificationagent.db.password = {{ $v }}{{ end }}
+
+# E-mail configuration settings.
+{{ with $v := (key (printf "%s/email/base" $base)) }}notificationagent.email-url = {{ $v }}{{ end }}
+{{ with $v := (key (printf "%s/notification-agent/enable-email" $base)) }}notificationagent.enable-email = {{ $v }}{{ end }}
+
+# AMQP connection settings.
+{{ with $v := (key (printf "%s/amqp/uri" $base)) }}notificationagent.amqp.uri = {{ $v }}{{ end }}
+{{ with $v := (key (printf "%s/amqp/exchange/name" $base)) }}notificationagent.amqp.exchange.name = {{ $v }}{{ end }}
+{{ with $v := (key (printf "%s/amqp/exchange/type" $base)) }}notificationagent.amqp.exchange.type = {{ $v }}{{ end }}
+{{- end -}}
