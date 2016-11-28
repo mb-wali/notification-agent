@@ -7,7 +7,7 @@
       (string/trim (:out (sh "git" "rev-parse" "HEAD")))
       ""))
 
-(defproject org.cyverse/notification-agent "2.8.1-SNAPSHOT"
+(defproject org.cyverse/notification-agent "2.10.0-SNAPSHOT"
   :description "A web service for storing and forwarding notifications."
   :url "https://github.com/cyverse-de/notification-agent"
   :license {:name "BSD"
