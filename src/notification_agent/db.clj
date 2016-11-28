@@ -1,9 +1,9 @@
 (ns notification-agent.db
   (:use [korma.db]
         [korma.core]
-        [kameleon.notification-entities]
         [notification-agent.config]
         [notification-agent.common]
+        [notification-agent.db.entities]
         [slingshot.slingshot :only [throw+ try+]])
   (:require [clojure.string :as string]
             [notification-agent.time :as time])
