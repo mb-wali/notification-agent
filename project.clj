@@ -7,7 +7,7 @@
       (string/trim (:out (sh "git" "rev-parse" "HEAD")))
       ""))
 
-(defproject org.cyverse/notification-agent "2.8.1-SNAPSHOT"
+(defproject org.cyverse/notification-agent "2.10.0-SNAPSHOT"
   :description "A web service for storing and forwarding notifications."
   :url "https://github.com/cyverse-de/notification-agent"
   :license {:name "BSD"
@@ -23,7 +23,6 @@
                                [com.fasterxml.jackson.core/jackson-core]]]
                  [compojure "1.5.0"]
                  [org.cyverse/clojure-commons "2.8.0"]
-                 [org.cyverse/kameleon "2.8.0"]
                  [org.cyverse/common-cli "2.8.0"]
                  [org.cyverse/service-logging "2.8.0"]
                  [org.cyverse/event-messages "0.0.1"]
