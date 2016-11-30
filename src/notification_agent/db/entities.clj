@@ -1,5 +1,5 @@
 (ns notification-agent.db.entities
-  (:use [korma.core]))
+  (:use [korma.core :exclude [update]]))
 
 (declare analysis_execution_statuses
          email_notification_messages

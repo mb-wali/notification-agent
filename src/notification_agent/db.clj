@@ -1,11 +1,12 @@
 (ns notification-agent.db
   (:use [korma.db]
-        [korma.core]
+        [korma.core :exclude [update]]
         [notification-agent.config]
         [notification-agent.common]
         [notification-agent.db.entities]
         [slingshot.slingshot :only [throw+ try+]])
   (:require [clojure.string :as string]
+            [korma.core :as sql]
             [notification-agent.time :as time])
   (:import [java.sql Timestamp]
            [java.util UUID]))
@@ -164,33 +165,33 @@
   "Marks notifications with selected UUIDs as deleted if they belong to the
    specified user."
   [user uuids]
-  (update notifications
-          (set-fields {:deleted true})
-          (where {:user_id (user-id-subselect user)
-                  :uuid    [in (map parse-uuid uuids)]})))
+  (sql/update notifications
+              (set-fields {:deleted true})
+              (where {:user_id (user-id-subselect user)
+                      :uuid    [in (map parse-uuid uuids)]})))
 
 (defn delete-matching-notifications
   "Deletes notifications matching a set of incoming parameters."
   [user params]
-  (update notifications
-          (set-fields {:deleted true})
-          (where (build-where-clause user params))))
+  (sql/update notifications
+              (set-fields {:deleted true})
+              (where (build-where-clause user params))))
 
 (defn mark-notifications-seen
   "Marks notifications with selected UUIDs as seen if they belong to the
    specified user."
   [user uuids]
-  (update notifications
-          (set-fields {:seen true})
-          (where {:user_id (user-id-subselect user)
-                  :uuid    [in (map parse-uuid uuids)]})))
+  (sql/update notifications
+              (set-fields {:seen true})
+              (where {:user_id (user-id-subselect user)
+                      :uuid    [in (map parse-uuid uuids)]})))
 
 (defn mark-matching-notifications-seen
   "Marks notifications matching a set of incoming parameters as seen."
   [user params]
-  (update notifications
-          (set-fields {:seen true})
-          (where (build-where-clause user params))))
+  (sql/update notifications
+              (set-fields {:seen true})
+              (where (build-where-clause user params))))
 
 (defn count-matching-messages
   "Counts the number of messages matching a set of query-string parameters."
@@ -568,9 +569,9 @@
       :logins_disabled - Boolean
       :message - The message that's displayed in the notification."
   [uuid update-values]
-  (update system_notifications
-          (set-fields (system-notification-update-map update-values))
-          (where {:uuid (parse-uuid uuid)}))
+  (sql/update system_notifications
+              (set-fields (system-notification-update-map update-values))
+              (where {:uuid (parse-uuid uuid)}))
   (get-system-notification-by-uuid uuid))
 
 (defn- system-notif-id-subselect
