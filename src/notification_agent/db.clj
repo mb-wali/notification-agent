@@ -8,7 +8,7 @@
   (:require [clojure.string :as string]
             [korma.core :as sql]
             [notification-agent.time :as time])
-  (:import [java.sql Timestamp]
+  (:import [java.sql Timestamp BatchUpdateException]
            [java.util UUID]))
 
 (defn- create-db-spec
@@ -675,11 +675,16 @@
 (defn upsert-ack
   "Upserts a system notification acknowledgment for a given user and notification. It checks to see
    if an acknowledgment record exists. If the record already exists, it uses the provided update
-   function, otherwise it uses the provided insert function."
+   function, otherwise it uses the provided insert function. If either one throws a
+   java.sql.BatchUpdateException, it'll try (once) to do the other."
   [insert update user sys-note-uuid]
   (if (ack-exists? user sys-note-uuid)
-    (update user sys-note-uuid)
-    (insert user sys-note-uuid)))
+    (try+ (update user sys-note-uuid)
+      (catch BatchUpdateException _
+        (insert user sys-note-uuid)))
+    (try+ (insert user sys-note-uuid)
+      (catch BatchUpdateException _
+        (update user sys-note-uuid)))))
 
 ;; NOT API
 (defn received
