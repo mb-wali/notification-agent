@@ -671,6 +671,16 @@
               (lock-user user)
               (system-notif-id sys-note-uuid)]]))
 
+(defn- make-savepoint [savepoint-name]
+  (exec-raw (str "SAVEPOINT " savepoint-name))
+  savepoint-name)
+
+(defn- rollback-to-savepoint [savepoint-name]
+  (exec-raw (str "ROLLBACK TO " savepoint-name)))
+
+(defn- release-savepoint [savepoint-name]
+  (exec-raw (str "RELEASE SAVEPOINT " savepoint-name)))
+
 ;; NOT API
 (defn upsert-ack
   "Upserts a system notification acknowledgment for a given user and notification. It checks to see
@@ -678,13 +688,21 @@
    function, otherwise it uses the provided insert function. If either one throws a
    java.sql.BatchUpdateException, it'll try (once) to do the other."
   [insert update user sys-note-uuid]
-  (if (ack-exists? user sys-note-uuid)
-    (try+ (update user sys-note-uuid)
-      (catch BatchUpdateException _
-        (insert user sys-note-uuid)))
-    (try+ (insert user sys-note-uuid)
-      (catch BatchUpdateException _
-        (update user sys-note-uuid)))))
+  (let [savepoint (name (gensym "sp"))]
+    (make-savepoint savepoint)
+    (if (ack-exists? user sys-note-uuid)
+      (try+ (update user sys-note-uuid)
+        (catch BatchUpdateException _
+          (rollback-to-savepoint savepoint)
+          (insert user sys-note-uuid))
+        (finally
+          (release-savepoint savepoint)))
+      (try+ (insert user sys-note-uuid)
+        (catch BatchUpdateException _
+          (rollback-to-savepoint savepoint)
+          (update user sys-note-uuid))
+        (finally
+          (release-savepoint savepoint))))))
 
 ;; NOT API
 (defn received
