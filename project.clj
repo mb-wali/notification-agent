@@ -23,7 +23,7 @@
                                [com.fasterxml.jackson.core/jackson-core]]]
                  [compojure "1.5.0"]
                  [org.cyverse/clojure-commons "2.8.0"]
-                 [org.cyverse/common-cli "2.8.0"]
+                 [org.cyverse/common-cli "2.8.1"]
                  [org.cyverse/kameleon "3.0.0"]
                  [org.cyverse/service-logging "2.8.0"]
                  [org.cyverse/event-messages "0.0.1"]
