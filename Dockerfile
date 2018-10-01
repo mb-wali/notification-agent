@@ -1,10 +1,10 @@
-FROM discoenv/clojure-base:master
+FROM clojure:lein-alpine
 
-ENV CONF_TEMPLATE=/usr/src/app/notificationagent.properties.tmpl
-ENV CONF_FILENAME=notificationagent.properties
-ENV PROGRAM=notification-agent
+WORKDIR /usr/src/app
 
-VOLUME ["/etc/iplant/de"]
+RUN apk add --no-cache git
+
+RUN ln -s "/usr/bin/java" "/bin/notification-agent"
 
 COPY project.clj /usr/src/app/
 RUN lein deps
@@ -15,9 +15,8 @@ COPY . /usr/src/app
 RUN lein uberjar && \
     cp target/notification-agent-standalone.jar .
 
-RUN ln -s "/usr/bin/java" "/bin/notification-agent"
-
-ENTRYPOINT ["run-service", "-Dlogback.configurationFile=/etc/iplant/de/logging/notificationagent-logging.xml", "-cp", ".:notification-agent-standalone.jar", "notification_agent.core"]
+ENTRYPOINT ["notification-agent", "-Dlogback.configurationFile=/etc/iplant/de/logging/notificationagent-logging.xml", "-cp", ".:notification-agent-standalone.jar", "notification_agent.core"]
+CMD ["--help"]
 
 ARG git_commit=unknown
 ARG version=unknown
