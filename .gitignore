@@ -7,6 +7,7 @@
 /.lein-plugins
 /checkouts
 /.lein-deps-sum
+/.nrepl-port
 /target
 /.project
 /.classpath
