@@ -35,7 +35,8 @@
                  [com.mchange/c3p0 "0.9.5.5"]
                  [com.novemberain/langohr "3.5.1"]
                  [korma "0.4.3"
-                  :exclusions [c3p0]]]
+                  :exclusions [c3p0]]
+                 [ring/ring-jetty-adapter "1.6.0"]]
   :eastwood {:exclude-namespaces [:test-paths]
              :linters [:wrong-arity :wrong-ns-form :wrong-pre-post :wrong-tag :misplaced-docstrings]}
   :plugins [[lein-ancient "0.6.15"]
