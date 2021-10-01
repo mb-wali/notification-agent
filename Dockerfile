@@ -12,11 +12,14 @@ RUN lein deps
 COPY conf/main/logback.xml /usr/src/app/
 COPY . /usr/src/app
 
+# copy config file 
+COPY notificationagent.properties /etc/iplant/de/notificationagent.properties
+
 RUN lein uberjar && \
     cp target/notification-agent-standalone.jar .
 
 ENTRYPOINT ["notification-agent", "-Dlogback.configurationFile=/etc/iplant/de/logging/notificationagent-logging.xml", "-cp", ".:notification-agent-standalone.jar", "notification_agent.core"]
-CMD ["--help"]
+# CMD ["--help"]
 
 ARG git_commit=unknown
 ARG version=unknown
